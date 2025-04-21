@@ -103,44 +103,5 @@ Network isolation: Services run in an isolated Docker network
 
 .dockerignore: Reduces build context
 
-🧪 Development Mode
-docker-compose.override.yml adds dev-specific configs:
 
-yaml
-Copy
-Edit
-services:
-  flask-api:
-    volumes:
-      - .:/app
-    environment:
-      FLASK_ENV: development
-    ports:
-      - "5000:5000"
-These settings apply automatically with docker-compose up.
 
-🤝 Contributing
-Contributions are welcome! Please fork the repo and submit a pull request.
-
-📄 License
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-👤 Author
-Your Name
-📧 your.email@example.com
-🌐 yourwebsite.dev (optional)
-
-yaml
-Copy
-Edit
-
----
-
-Let me know if you'd like me to:
-
-- Add CI/CD examples (GitHub Actions, etc.)
-- Generate shields (e.g., Docker build status, license)
-- Customize it with your name and contact info  
-- Include a sample `.dockerignore` or license file
-
-Just say the word!
