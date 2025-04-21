@@ -27,43 +27,65 @@ Edit
 
 ## 🧱 Setup & Usage
 
-📦 Clone the Repository
-bash
-Copy
-Edit
+### Clone the Repository
+
+```bash
 git clone https://github.com/sanasikandar/flask-api-docker-compose.git
 cd flask-api-docker-compose
-🛠 Make the wait-for-it.sh Executable
-bash
-Copy
-Edit
 chmod +x wait-for-it.sh
-🐳 Build and Start the Containers
-bash
-Copy
-Edit
 docker-compose up --build
-Once running, the Flask API will be available at:
+Access the Flask API
+Open http://localhost:5000 in your browser or test with:
 
-http://localhost:5000
 
-You can also test it via cURL:
-
-bash
-Copy
-Edit
 curl http://localhost:5000
 🧹 Clean Up
 To stop and remove containers:
 
-bash
-Copy
-Edit
-docker-compose down
-To also remove associated volumes:
 
-bash
-Copy
-Edit
+docker-compose down
+To remove containers and volumes:
+
+
 docker-compose down -v
+⚙️ Environment Variables
+
+Variable	Service	Purpose	Default
+FLASK_ENV	flask-api	Flask environment mode	development
+REDIS_HOST	flask-api	Redis service hostname	redis
+REDIS_PORT	flask-api	Redis service port	6379
+Defined in docker-compose.yml.
+
+📦 Scaling Flask API
+You can horizontally scale the Flask service using:
+
+
+docker-compose up --scale flask-api=3 --build
+🩺 Health Checks
+Health checks ensure services are ready before proceeding:
+
+Redis: Uses redis-cli ping
+
+Flask API: Monitors health via the / endpoint
+
+Flask waits for Redis using wait-for-it.sh
+
+🛠 Design Considerations
+Multi-stage Docker builds: Keeps image size small and clean
+
+Non-root user: Enhances security
+
+Volumes:
+
+Code reloading in development
+
+Redis data persistence
+
+Automatic restarts: Services recover on failure
+
+Network isolation: Services run in an isolated Docker network
+
+.dockerignore: Reduces build context
+
+
 
