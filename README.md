@@ -5,16 +5,6 @@ This project demonstrates a Dockerized Flask API application with Redis as a cac
 
 ---
 
-## 📁 Project Structure
-
-. ├── app.py # Flask application ├── requirements.txt # Python dependencies ├── Dockerfile # Multi-stage Dockerfile ├── docker-compose.yml # Main Compose configuration ├── docker-compose.override.yml # Dev overrides (e.g., volume mounts) ├── wait-for-it.sh # Startup script to wait for Redis ├── .dockerignore # Files to exclude from Docker build └── README.md # Documentation
-
-yaml
-Copy
-Edit
-
----
-
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -25,67 +15,74 @@ Edit
 
 ---
 
-## 🧱 Setup & Usage
+## Flask API with Docker Compose
+This repository provides a simple example of a Flask API application running with Docker Compose, utilizing Redis as a cache.
 
-### Clone the Repository
+## 🚀 Quick Start
+Clone the repository:
 
-```bash
 git clone https://github.com/sanasikandar/flask-api-docker-compose.git
 cd flask-api-docker-compose
-chmod +x wait-for-it.sh
-docker-compose up --build
-Access the Flask API
-Open http://localhost:5000 in your browser or test with:
+Make the wait-for-it.sh script executable:
 
+chmod +x wait-for-it.sh
+## Build and start the application:
+
+docker-compose up --build
+Access the Flask API:
+
+Open your browser and navigate to http://localhost:5000
+
+Or test with curl:
 
 curl http://localhost:5000
-🧹 Clean Up
-To stop and remove containers:
 
+## 🧹 Clean Up
+To stop and remove the containers:
 
 docker-compose down
-To remove containers and volumes:
-
+To stop, remove the containers, and volumes:
 
 docker-compose down -v
-⚙️ Environment Variables
+
+## ⚙️ Environment Variables
 
 Variable	Service	Purpose	Default
 FLASK_ENV	flask-api	Flask environment mode	development
 REDIS_HOST	flask-api	Redis service hostname	redis
 REDIS_PORT	flask-api	Redis service port	6379
-Defined in docker-compose.yml.
+These variables are defined in docker-compose.yml.
 
-📦 Scaling Flask API
-You can horizontally scale the Flask service using:
+## 📦 Scaling Flask API
+You can horizontally scale the Flask service using Docker Compose:
 
 
 docker-compose up --scale flask-api=3 --build
-🩺 Health Checks
+This will scale the Flask service to 3 instances.
+
+## 🩺 Health Checks
 Health checks ensure services are ready before proceeding:
 
 Redis: Uses redis-cli ping
 
 Flask API: Monitors health via the / endpoint
 
-Flask waits for Redis using wait-for-it.sh
+Flask waits for Redis to be available using the wait-for-it.sh script before starting.
 
-🛠 Design Considerations
-Multi-stage Docker builds: Keeps image size small and clean
+## 🛠 Design Considerations
+Multi-stage Docker builds: Keeps image size small and clean.
 
-Non-root user: Enhances security
+Non-root user: Enhances security.
 
 Volumes:
 
-Code reloading in development
+Code reloading in development.
 
-Redis data persistence
+Redis data persistence.
 
-Automatic restarts: Services recover on failure
+Automatic restarts: Services recover on failure.
 
-Network isolation: Services run in an isolated Docker network
+Network isolation: Services run in an isolated Docker network.
 
-.dockerignore: Reduces build context
-
-
+.dockerignore: Reduces build context and improves efficiency.
 
